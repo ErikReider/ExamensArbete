@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TestOrder:
-  - CubeBenchmark
+  - ColoredCubes
   _fpsText: {fileID: 1668854386}
   _hudRefreshRate: 0.25
 --- !u!4 &1770379933
