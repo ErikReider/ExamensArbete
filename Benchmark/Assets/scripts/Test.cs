@@ -30,7 +30,7 @@ public abstract class Test : MonoBehaviour
     protected void Update()
     {
         int currentFPS = (int)(1f / Time.unscaledDeltaTime);
-        if ((benchmarkType == TestType.fps && Time.timeSinceLevelLoad <= benchmarkTime) || (benchmarkType == TestType.time && currentFPS >= minFPS))
+        if ((benchmarkType == TestType.fps && Time.timeSinceLevelLoad <= benchmarkTime) || (benchmarkType == TestType.time && (currentFPS >= minFPS || Time.timeSinceLevelLoad < 3)))
         {
             onUpdate();
             listOfFrameRate.Add(currentFPS);
