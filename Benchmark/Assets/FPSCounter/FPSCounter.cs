@@ -4,25 +4,36 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public struct testData {
+public struct testData
+{
     public string testName;
     public int avgFPS;
-    public testData(string testName, int avgFPS) {
+    public float timeUntilMinFPS;
+    public TestType testType;
+
+    public testData(string testName, TestType testType, int avgFPS, float timeUntilMinFPS)
+    {
         this.testName = testName;
+        this.testType = testType;
         this.avgFPS = avgFPS;
+        this.timeUntilMinFPS = timeUntilMinFPS;
+
     }
 
-    public override string ToString() {
-        return testName + ": " + avgFPS.ToString();
-    }
+    public override string ToString() => testName + ": " + (testType == TestType.time ? timeUntilMinFPS : avgFPS).ToString();
 }
 
-public class FPSCounter : MonoBehaviour {
+public class FPSCounter : MonoBehaviour
+{
     public static FPSCounter instance;
-    void Awake() {
-        if (instance != null) {
+    void Awake()
+    {
+        if (instance != null)
+        {
             Destroy(gameObject);
-        } else {
+        }
+        else
+        {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -36,9 +47,11 @@ public class FPSCounter : MonoBehaviour {
 
     public List<testData> averageFPSData = new List<testData>();
 
-    public void Update() {
-        if (Time.unscaledTime > _timer) {
-            fps = (int) (1f / Time.unscaledDeltaTime);
+    public void Update()
+    {
+        if (Time.unscaledTime > _timer)
+        {
+            fps = (int)(1f / Time.unscaledDeltaTime);
             _fpsText.text = fps.ToString();
             _timer = Time.unscaledTime + _hudRefreshRate;
         }

@@ -246,10 +246,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPrefab: {fileID: 6072275925952526217, guid: 636d5db09989f285fa0a691618b31f25, type: 3}
-  itemsPerRow: 256
-  timesToRepeat: 5
+  itemsPerRow: 64
   mainCamera: {fileID: 2076481413}
-  iteration: 0
 --- !u!4 &2017259754
 Transform:
   m_ObjectHideFlags: 0

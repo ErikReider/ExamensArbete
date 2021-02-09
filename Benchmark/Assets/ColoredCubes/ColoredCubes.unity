@@ -342,8 +342,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277867f1d8a7c3d24b2bb64ab029e5f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testName: 
   myPrefab: {fileID: 2929599418236311158, guid: 990bd715cf4f8e95f8a298ed9a741b8c, type: 3}
-  cubeRows: 50
-  timesToRepeat: 10
+  cubeRows: 128
   mainCamera: {fileID: 963194227}
