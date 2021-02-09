@@ -13,7 +13,6 @@ public class ColoredCone : Test {
     public int timesToRepeat = 1;
     public Camera mainCamera;
 
-    private List<GameObject> cubes = new List<GameObject>();
     public int iteration = 0;
 
     // Adds a new row with two more cubes to create a cone
@@ -31,7 +30,6 @@ public class ColoredCone : Test {
             Material material = new Material(cube.GetComponent<MeshRenderer>().material.shader);
             material.SetColor("_Color", UnityEngine.Random.ColorHSV());
             cube.GetComponent<MeshRenderer>().material = material;
-            cubes.Add(cube);
         }
         iteration++;
         itemsPerRow += 2;
