@@ -5,32 +5,36 @@
 \author{Erik Reider}
 \date{January 2021}
 
-\usepackage{natbib}
-\usepackage{graphicx}
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{sources.bib}
 
 \begin{document}
 
 \maketitle
 
 \section{Introduction}
-When creating a game, a programmer can choose where their game will be played. Depending on the platform, it could either be really simple or extremely difficult.The Unity game engine (also referred to as Unity) is a game creation tool that is considered to be one of the most used game engines in the world. Unity can build games for Windows, Linux, Mac OS, Android, iOS, every modern console and your web browser.
+When creating a game, a programmer can choose where their game will be played. Depending on the platform, it could either be really simple or extremely difficult.The Unity game engine (also referred to as Unity) is a game creation tool that is considered to be one of the best game engines in the world. Unity can build games for Windows, Linux, Mac OS, Android, iOS, every modern console and your web browser.
 
 \section{Background}
-When compiling (building the project) towards Linux, the preferred graphics API (an acronym for Application Programming Interface) is Vulkan while the web browser uses WebGL2 (OpenGL ES 3.0 but will be referred to as WebGL). The graphics API makes it easier for the developers to render graphics more easily instead of writing code for every graphics card in existence. \par
+When compiling (building the project) towards Linux, the preferred graphics API (an acronym for Application Programming Interface) is Vulkan while the web browser uses WebGL2 (OpenGL ES 3.0 but will be referred to as WebGL). The graphics API makes it easier for the developers to render graphics more easily instead of writing code for every graphics card in existence\cite{APIWiki}. \par
 
-OpenGL ES is a stripped down version of the regular more feature rich OpenGL while the differences between the latter and Vulkan is more stark. Vulkan is the successor to OpenGL which brings more asynchronous CPU optimizations and has less overhead but because of it being relatively new, it is not as widely adopted as OpenGL. Ergo, one of the reasons why WebGL uses OpenGL instead of Vulkan. One of the other reasons why WebGL doesn’t use Vulkan is because of the lack of native support for it on some platforms like Mac OS and iOS which uses OpenGL and Apple’s Metal API.
+OpenGL ES is a stripped down version of the regular more feature rich OpenGL while the differences between the latter and Vulkan is more stark. Vulkan is the successor to OpenGL which brings more asynchronous CPU optimizations and has less overhead but because of it being relatively new, it is not as widely adopted as OpenGL. Ergo, one of the reasons why WebGL uses OpenGL instead of Vulkan. One of the other reasons why WebGL doesn’t use Vulkan is because of the lack of native support for it on some platforms like Mac OS and iOS which uses OpenGL and Apple’s Metal API. Because of Vulkan being more efficient than OpenGL, it can process more draw calls in a given time than OpenGL. Draw calls are calls to the CPU that contains new materials, textures, objects, etc. Each call is then sent to the GPU for processing \cite{DrawCalls}. \par
+
+Unity uses C\# (pronounced as "see sharp") is a Microsoft built programming language based off of the C languages. C\# was originaly intended to only be used on Microsofts Windows platform but then decided to sponsor an open-sourced implemntation of the language named Mono\cite{CSharpWiki}. Unity uses the Mono implemntation to be able to compile towards almost any platform.
 
 
 \section{Description}
-Because WebGL has a tendency of being less resource efficient than Vulkan, there should be a real performance difference between the two, especially on lower end devices like older computers and consoles, phones, smart fridges etc, where the CPU performance isn’t the best. So focusing on CPU limited situations is an excellent way of benchmarking the differences. The benchmarks should be conducted on a low-end PC and a high-end PC to verify the performance differences. \par
-To make the comparison fair, the high-end PC’s CPU will be underclocked to 2.0GHz to simulate a lower-end PC with the same hardware to eliminate any differences except for the CPU. While testing, the CPU usage, FPS and the GPU usage will be logged.
+Because WebGL has a tendency of being less resource efficient than Vulkan, there should be an observable performance difference between the two, especially on lower end devices where the CPU performance isn’t the best. So focusing on CPU limited situations is an excellent way of benchmarking the differences. The benchmarks should be conducted on a low-end PC and a high-end PC to verify the performance differences. \par
+To make the comparison as scientific as possible, the high-end PC’s CPU will be underclocked to 2.0GHz to simulate a lower-end PC with the same hardware to eliminate any differences except for the CPU. Those results will then be compared to the stock PC. While testing, the FPS will be logged.
 
 
 \section{Procedure}
-Blender will be used to create the game scene within the Unity engine. The results will be graphed and displayed accordingly. The relevant courses are Programming 1, 2 and the digital creation course.
+The C\# code will generate each benchmark in realtime within the Unity engine. The first benchmark will generate a large 64x64 grid of cubes with random colors and Y position. On each tick (frame update), each cube will be destroyed and the grid gets created again with new materials. This should increase the amount of draw calls called. The second benchmark generates a ring of 256 cubes. On each tick, a new row gets generated with 2 more cubes than the last, building a cone. This benchmark also increases the amount of draw calls because of the sheer amount of cubes being added and visible at the same time.\par
+
+Each benchmark will run for 30 seconds to be able to collect a large amount of data. All of the benchmarks will be ran 2 times each on a high-end and a low-end PC with WebGL, Vulkan and with OpenGL as a control. The results will be graphed and displayed accordingly. The relevant courses are Programming 1, 2 and the digital creation course.
 
 \section {Boundaries}
-There will only be one benchmark to test with three reruns to verify the performance results.
+There will only be two benchmarks to test with three reruns to verify the performance results.
 
 \section {TimeTable}
 \begin{center}
@@ -60,6 +64,6 @@ Each hardware setup will run the benchmark three times to eliminate any anomalie
 \end{itemize}
 
 
-\bibliographystyle{plain}
-\bibliography{references}
+\printbibliography
+
 \end{document}
