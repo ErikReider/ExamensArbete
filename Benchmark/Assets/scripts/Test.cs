@@ -17,14 +17,7 @@ public abstract class Test : MonoBehaviour {
     }
 
     private void done() {
-        FPSCounter.instance.TestOrder.RemoveAt(0);
-        if (FPSCounter.instance.TestOrder.Count == 0) {
-            // Closes the application and pauses the debugger if being debugged
-            Application.Quit();
-            Debug.Break();
-            return;
-        }
-        SceneManager.LoadScene(FPSCounter.instance.TestOrder[0]);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     protected void Update() {

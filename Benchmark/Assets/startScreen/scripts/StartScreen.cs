@@ -5,6 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class StartScreen : MonoBehaviour {
     void Start() {
-        SceneManager.LoadScene(FPSCounter.instance.TestOrder[0]);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

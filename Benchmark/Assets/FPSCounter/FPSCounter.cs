@@ -11,6 +11,10 @@ public struct testData {
         this.testName = testName;
         this.avgFPS = avgFPS;
     }
+
+    public override string ToString() {
+        return testName + ": " + avgFPS.ToString();
+    }
 }
 
 public class FPSCounter : MonoBehaviour {
@@ -23,8 +27,6 @@ public class FPSCounter : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
         }
     }
-
-    public List<string> TestOrder;
 
     public Text _fpsText;
     public int fps = 0;
@@ -39,12 +41,6 @@ public class FPSCounter : MonoBehaviour {
             fps = (int) (1f / Time.unscaledDeltaTime);
             _fpsText.text = fps.ToString();
             _timer = Time.unscaledTime + _hudRefreshRate;
-        }
-
-        if (Input.GetKeyDown("1")) {
-            SceneManager.LoadScene("CubesBenchmark");
-        } else if (Input.GetKeyDown("2")) {
-            SceneManager.LoadScene("Test2");
         }
     }
 }
