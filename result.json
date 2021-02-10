@@ -1,0 +1,38 @@
+{
+  "Results_Stock": {
+    "result_OpenGLCore": {
+      "ColoredCubes": 41.666666666666664,
+      "ColoredCone": 8.924221333333334
+    },
+    "result_WebGL_Firefox": {
+      "ColoredCubes": 6.0,
+      "ColoredCone": 4.024666666666667
+    },
+    "result_WebGL_Chromium": {
+      "ColoredCubes": 6.0,
+      "ColoredCone": 4.684998333333334
+    },
+    "result_Vulkan": {
+      "ColoredCubes": 39.333333333333336,
+      "ColoredCone": 11.876266666666666
+    }
+  },
+  "Results_2GHz": {
+    "result_OpenGLCore": {
+      "ColoredCubes": 21.0,
+      "ColoredCone": 6.4430043333333336
+    },
+    "result_WebGL_Firefox": {
+      "ColoredCubes": 2.0,
+      "ColoredCone": 3.025
+    },
+    "result_WebGL_Chromium": {
+      "ColoredCubes": 2.0,
+      "ColoredCone": 3.254693
+    },
+    "result_Vulkan": {
+      "ColoredCubes": 19.0,
+      "ColoredCone": 8.500729000000002
+    }
+  }
+}
