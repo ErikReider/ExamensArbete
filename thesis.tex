@@ -1,5 +1,12 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{pgfplots}  
+\pgfplotsset{width=6.6cm,compat=1.7}  
+
+
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{sources.bib}
+
 % has to be the last package to import
 \usepackage{hyperref}
 \hypersetup{
@@ -15,8 +22,6 @@
 \author{Erik Reider}
 \date{January 2021}
 
-\usepackage[backend=bibtex]{biblatex}
-\addbibresource{sources.bib}
 
 \begin{document}
 
@@ -32,7 +37,6 @@
 
 % Tabel of content
 \newpage
-\frontmatter
 \tableofcontents
 \newpage
 
@@ -122,6 +126,75 @@ Each hardware setup will run the benchmark three times to eliminate any anomalie
 \section {Conclusion}
 
 
+
+
+
+
+\begin{center}
+
+\begin{figure}[h!]
+\begin{tikzpicture}
+\begin{axis} [
+title = First Test,
+ylabel={Frames per second},
+nodes near coords,
+nodes near coords align={vertical},
+width = 0.6*\textwidth,
+height = 0.8*\textwidth,
+major x tick style = transparent,
+ybar=2*\pgflinewidth,
+bar width=14pt,
+ymajorgrids = true,
+symbolic x coords={High-end, Low-end},
+xtick = data,
+scaled y ticks = false,
+enlarge x limits=0.45,
+ymin=0,
+legend style={at={(1.4, 0.6)}, anchor=north},
+]
+\addplot coordinates {(High-end, 39) (Low-end, 19)}; %Vulkan
+\addplot coordinates {(High-end, 42) (Low-end, 21)}; %OpenGL
+\addplot coordinates {(High-end, 6) (Low-end, 2)}; %Firefox
+\addplot coordinates {(High-end, 6) (Low-end, 2)}; %Chromium
+\legend{Vulkan, OpenGL, Firefox(WebGL), Chromium(WebGL)}
+\end{axis}
+\end{tikzpicture}
+\caption{First Test}
+\label{fig:test1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{tikzpicture}
+\begin{axis} [
+title = Second Test,
+ylabel = {Seconds},
+nodes near coords,
+nodes near coords align={vertical},
+width = 0.6*\textwidth,
+height = 0.8*\textwidth,
+major x tick style = transparent,
+ybar=2*\pgflinewidth,
+bar width=14pt,
+ymajorgrids = true,
+symbolic x coords={High-end, Low-end},
+xtick = data,
+scaled y ticks = false,
+enlarge x limits=0.45,
+ymin=0,
+legend style={at={(1.4, 0.6)}, anchor=north},
+]
+\addplot coordinates {(High-end, 12) (Low-end, 9)}; %Vulkan
+\addplot coordinates {(High-end, 9) (Low-end, 6)}; %OpenGL
+\addplot coordinates {(High-end, 4) (Low-end, 3)}; %Firefox
+\addplot coordinates {(High-end, 5) (Low-end, 3)}; %Chromium
+\legend{Vulkan, OpenGL, Firefox(WebGL), Chromium(WebGL)}
+\end{axis}
+\end{tikzpicture}
+\caption{First Test}
+\label{fig:test1}
+\end{figure}
+
+\end{center}
 
 % References
 \printbibliography[heading=bibintoc,title={References}]
