@@ -18,6 +18,9 @@
 }
 \urlstyle{same}
 
+% Extra vertical spacing for each paragraph
+\setlength{\parskip}{1em}
+
 
 \title{Unity game performance difference between Vulkan and WebGL in Linux}
 \author{Erik Reider}
@@ -34,10 +37,10 @@
 \begin{abstract}
 
 \end{abstract}
+\newpage
 
 
 % Tabel of content
-\newpage
 \tableofcontents
 \newpage
 
@@ -125,24 +128,26 @@ Each hardware setup will run the benchmark three times to eliminate any anomalie
 
 
 \section {Results and analysis}
-Figure [\ref{fig:test1}] shows a massive difference between both platforms while on each platform, the differences are very minutiae. This graph shows the averaged fps which means that a higher number is always better but within around a 8\% range, the differences will not matter. OpenGL is around 3fps faster than Vulkan while both browsers perform the same. The performance drop from stock CPU clock speeds to 2GHz is enormous at a 50\% drop in performance. The high-end PCs native performance is around 6.75 times faster than both web browsers. The difference on the low-end PC was exponentially larger at an eye-watering 1000\% performace increase.
+Figure[\ref{fig:test1}] shows a massive difference between both platforms while on each platform, the differences are very minutiae. This graph shows the averaged fps which means that a higher number is always better but, within around a 8\% range the differences do not matter. OpenGL is around 3fps faster than Vulkan while both browsers perform the same. The performance drop from stock CPU clock speeds to 2GHz is enormous at a 50\% drop in performance. The high-end PCs native performance is around 6.75 times faster than both web browsers. The difference on the low-end PC was exponentially larger at an eye-watering 1000\% performace increase.
 
-The results from figure [\ref{fig:test2}] are not as drastically different from each other compared to Figure [\ref{fig:test1}] but there is still a difference. This test measures time instead of fps meaning that a larger number results in a higher and a more stable fps. Vulkan lasted for 3 seconds longer than OpenGL on both systems while lasting 7.5 averaged seconds longer than the web results. The OpenGL results on both systems lasted an averaged 3.75 seconds longer than both web browsers.
+The results from figure[\ref{fig:test2}] are not as drastically different from each other compared to figure[\ref{fig:test1}] but there is still a difference. This test measures time instead of fps meaning that a larger number results in a higher and a more stable fps. Vulkan lasted for 3 seconds longer than OpenGL on both systems while lasting 7.5 averaged seconds longer than the web results. The OpenGL results on both systems lasted an averaged 3.75 seconds longer than both web browsers.
 
 \section {Discussion}
-Using the data collected,
+Using the data collected, The performance difference between WebGL and Vulkan is ginormous, especially on lower-end hardware where performance really matters. 
 
 \section {Conclusion}
 
 
 
 
+% References
+\printbibliography[heading=bibnumbered,title={References}]
 
-
-\begin{center}
+% Figures
+\newpage\section {Figures}
 
 \begin{figure}[!ht]
-\begin{tikzpicture}
+\center\begin{tikzpicture}
 \begin{axis} [
     title = First Test,
     ylabel style={align=center}, ylabel=Averaged frames per second\\(More is better),
@@ -174,7 +179,7 @@ Using the data collected,
 \end{figure}
 
 \begin{figure}[!ht]
-\begin{tikzpicture}
+\center\begin{tikzpicture}
 \begin{axis} [
     title = Second Test,
     ylabel style={align=center}, ylabel=Seconds\\(More is better),
@@ -205,9 +210,6 @@ Using the data collected,
 \label{fig:test2}
 \end{figure}
 
-\end{center}
 
-% References
-\printbibliography[heading=bibintoc,title={References}]
 
 \end{document}
