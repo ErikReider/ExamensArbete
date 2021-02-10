@@ -33,7 +33,7 @@ for folder in resultFolders:
         for res in results[folder][r]:
             val = results[folder][r][res]
             avg = sum(val) / len(val)
-            results[folder][r][res] = avg
+            results[folder][r][res] = avg.__round__()
 
 
 results = json.dumps(results, indent=2)
