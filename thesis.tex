@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{pgfplots}  
-\pgfplotsset{width=6.6cm,compat=1.7}  
+\usepackage{pgfplots}
+\pgfplotsset{width=6.6cm,compat=1.7}
 
 
 \usepackage[backend=bibtex]{biblatex}
@@ -11,6 +11,7 @@
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
+    citecolor=blue,
     linkcolor=black,
     filecolor=magenta,
     urlcolor=blue,
@@ -73,16 +74,22 @@ The text editors used.
 \newline\href{https://neovim.io/}{NeoVim}
 \newline\href{https://code.visualstudio.com/}{Visual Studio Code}
 
+\subsection* {Mozilla Firefox and Chromium}
+The web browsers used to test WebGL
+\newline\href{https://www.mozilla.org/en-US/firefox/new/}{Mozilla Firefox}
+\newline\href{https://code.visualstudio.com/}{Chromium}
+
+
 \subsection* {Github}
 The reposetory host used to store all Unity files
 \newline\href{https://github.com}{Github}
 
 \subsection* {Courses}
-The relevant courses are Programming 1, 2 and the digital creation course.
+The relevant courses are Programming 1, 2 and the digital creation course offered by \href{https://www.ntigymnasiet.se/}{NTI Gymnasiet}.
 
 
 \section {Boundaries}
-There will only be two benchmarks with 3 different APIs to test with three reruns to verify the performance results.
+There will only be two benchmarks with 3 different APIs to test with three reruns to verify the performance results. Only two of the most popular browsers will be tested.
 
 \section {TimeTable}
 \begin{center}
@@ -105,7 +112,7 @@ Run benchmarks & 1 day \\
 \section {Method}
 The C\# code will generate each benchmark in realtime within the Unity engine. The first benchmark will generate a large 64x64 grid of cubes with random colors and Y position. On each tick (frame update), each cube will be destroyed and the grid gets created again with new materials. This should increase the amount of draw calls called. The second benchmark generates a ring of 256 cubes. On each tick, a new row gets generated with 2 more cubes than the last, building a cone. This benchmark also increases the amount of draw calls because of the sheer amount of cubes being added and visible at the same time.\par
 
-Each hardware setup will run the benchmark three times to eliminate any anomalies while testing. All of the benchmarks will be ran with Vulkan, WebGL and with OpenGL as a control. While running the benchmark, the FPS will be logged and averaged into separate files per run to ease the comparison between different results and to eliminate any inevitable mistakes. Each benchmark will run for 30 seconds before moving to the next test. Before running the benchmarks, all non essential programs like Discord, Spotify, Steam will be killed to further eliminate any strange deviations between each run. To make the benchmark more CPU bound, all settings will be set to the lowest value which will increase the performance delta if there is one.
+Each hardware setup will run the benchmark three times to eliminate any anomalies while testing. All of the benchmarks will be ran with Vulkan, WebGL and with OpenGL as a control. To increase the reliability of the WebGL tests, both Firefox and Chromium (which Google Chrome is based off of) will be used to run the benchmark. Those browsers tend to be the most popular choices\cite{WebBrowsers}. While running the benchmark, the FPS will be logged and averaged into separate files per run to ease the comparison between different results and to eliminate any inevitable mistakes. The first benchmark will run for 30 seconds meanwhile the second benchmark will run until the fps (acronym for frames per second) drops below 10. Before running the benchmarks, all non essential programs like Discord, Spotify, Steam will be killed to further eliminate any strange deviations between each run. To make the benchmark more CPU bound, all settings will be set to the lowest value which will increase the performance delta if there is one.
 
 \subsection {PC specifications}
 \begin{itemize}
@@ -118,10 +125,12 @@ Each hardware setup will run the benchmark three times to eliminate any anomalie
 
 
 \section {Results and analysis}
+Figure [\ref{fig:test1}] shows a massive difference between both platforms while on each platform, the differences are very minutiae. This graph shows the averaged fps which means that a higher number is always better but within around a 8\% range, the differences will not matter. OpenGL is around 3fps faster than Vulkan while both browsers perform the same. The performance drop from stock CPU clock speeds to 2GHz is enormous at a 50\% drop in performance. The high-end PCs native performance is around 6.75 times faster than both web browsers. The difference on the low-end PC was exponentially larger at an eye-watering 1000\% performace increase.
 
+The results from figure [\ref{fig:test2}] are not as drastically different from each other compared to Figure [\ref{fig:test1}] but there is still a difference. This test measures time instead of fps meaning that a larger number results in a higher and a more stable fps. Vulkan lasted for 3 seconds longer than OpenGL on both systems while lasting 7.5 averaged seconds longer than the web results. The OpenGL results on both systems lasted an averaged 3.75 seconds longer than both web browsers.
 
 \section {Discussion}
-
+Using the data collected,
 
 \section {Conclusion}
 
@@ -132,25 +141,26 @@ Each hardware setup will run the benchmark three times to eliminate any anomalie
 
 \begin{center}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \begin{tikzpicture}
 \begin{axis} [
-title = First Test,
-ylabel={Frames per second},
-nodes near coords,
-nodes near coords align={vertical},
-width = 0.6*\textwidth,
-height = 0.8*\textwidth,
-major x tick style = transparent,
-ybar=2*\pgflinewidth,
-bar width=14pt,
-ymajorgrids = true,
-symbolic x coords={High-end, Low-end},
-xtick = data,
-scaled y ticks = false,
-enlarge x limits=0.45,
-ymin=0,
-legend style={at={(1.4, 0.6)}, anchor=north},
+    title = First Test,
+    ylabel style={align=center}, ylabel=Averaged frames per second\\(More is better),
+    nodes near coords,
+    nodes near coords align={vertical},
+    width = 0.6*\textwidth,
+    height = 0.8*\textwidth,
+    major x tick style = transparent,
+    ybar=2*\pgflinewidth,
+    bar width=14pt,
+    ymajorgrids = true,
+    symbolic x coords={High-end, Low-end},
+    xtick = data,
+    scaled y ticks = false,
+    enlarge x limits=0.45,
+    ymin=0,
+    ymax=60,
+    legend style={at={(1.4, 0.6)}, anchor=north},
 ]
 \addplot coordinates {(High-end, 39) (Low-end, 19)}; %Vulkan
 \addplot coordinates {(High-end, 42) (Low-end, 21)}; %OpenGL
@@ -159,29 +169,30 @@ legend style={at={(1.4, 0.6)}, anchor=north},
 \legend{Vulkan, OpenGL, Firefox(WebGL), Chromium(WebGL)}
 \end{axis}
 \end{tikzpicture}
-\caption{First Test}
+\caption{Colored Cubes Test}
 \label{fig:test1}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \begin{tikzpicture}
 \begin{axis} [
-title = Second Test,
-ylabel = {Seconds},
-nodes near coords,
-nodes near coords align={vertical},
-width = 0.6*\textwidth,
-height = 0.8*\textwidth,
-major x tick style = transparent,
-ybar=2*\pgflinewidth,
-bar width=14pt,
-ymajorgrids = true,
-symbolic x coords={High-end, Low-end},
-xtick = data,
-scaled y ticks = false,
-enlarge x limits=0.45,
-ymin=0,
-legend style={at={(1.4, 0.6)}, anchor=north},
+    title = Second Test,
+    ylabel style={align=center}, ylabel=Seconds\\(More is better),
+    nodes near coords,
+    nodes near coords align={vertical},
+    width = 0.6*\textwidth,
+    height = 0.8*\textwidth,
+    major x tick style = transparent,
+    ybar=2*\pgflinewidth,
+    bar width=14pt,
+    ymajorgrids = true,
+    symbolic x coords={High-end, Low-end},
+    xtick = data,
+    scaled y ticks = false,
+    enlarge x limits=0.45,
+    ymin=0,
+    ymax=20,
+    legend style={at={(1.4, 0.6)}, anchor=north},
 ]
 \addplot coordinates {(High-end, 12) (Low-end, 9)}; %Vulkan
 \addplot coordinates {(High-end, 9) (Low-end, 6)}; %OpenGL
@@ -190,8 +201,8 @@ legend style={at={(1.4, 0.6)}, anchor=north},
 \legend{Vulkan, OpenGL, Firefox(WebGL), Chromium(WebGL)}
 \end{axis}
 \end{tikzpicture}
-\caption{First Test}
-\label{fig:test1}
+\caption{Colored Cone test}
+\label{fig:test2}
 \end{figure}
 
 \end{center}
